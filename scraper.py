@@ -35,11 +35,8 @@ def extract_text(url):
     soup = BeautifulSoup(r.content, "html.parser")
     body = soup.find("div", {"class":"article-item__body"})
     if body is None:
-        bodys = soup.findAll('div', {'class': 'Theme-Layer-BodyText--inner'})
-        full_text = ''
-        for body in bodys:
-            text = body.find('p').text.strip()
-            full_text += text + '\n'
+        body = soup.find('div', {'class': 'article__body cleared'})
+        full_text = body.text.strip()
     else:
         full_text = body.text.strip()
     return full_text
